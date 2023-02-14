@@ -338,7 +338,7 @@ int main(int argc, char** argv)
 
                 cv::putText(im, cv::format("Facing %s", GetDirectionString(direction)), cv::Point(50, size.height - 50), cv::FONT_HERSHEY_SIMPLEX, 1.5, cv::Scalar(0, 0, 255), 5);
 
-                cv::circle(im, image_points[0], FACE_RADIUS, radiusColor, 1);
+                cv::circle(im, image_points[0], FACE_RADIUS, radiusColor, 3);
             }
 
             //cv::putText(im, cv::format("fps %.2f",fps), cv::Point(50, size.height - 50), cv::FONT_HERSHEY_COMPLEX, 1.5, cv::Scalar(0, 0, 255), 3);
