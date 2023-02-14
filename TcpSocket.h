@@ -19,10 +19,10 @@ public:
 
    int send(char *msg, int msgSize);
 
-   /**
-    * start multithreaded server. This requires a struct that defines the data to be passed to each thread, and a function that defines what the thread will do
-    */
-   int startServer(void *threadData, function<void *(void *)> threadFunction);
+   // /**
+   //  * start multithreaded server. This requires a struct that defines the data to be passed to each thread, and a function that defines what the thread will do
+   //  */
+   // int startServer(void *threadData, function<void *(void *)> threadFunction);
 
    struct
    {
