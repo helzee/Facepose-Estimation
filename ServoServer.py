@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.6
 from flask import Flask, json, request, Response
 from adafruit_servokit import ServoKit
 import threading
