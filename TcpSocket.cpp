@@ -5,6 +5,11 @@
 
 using namespace std;
 
+TcpSocket::TcpSocket()
+{
+   // temp object constructure
+   sd = -1;
+}
 // create client
 TcpSocket::TcpSocket(const char *port, const char *address) : port(port), address(address)
 {
