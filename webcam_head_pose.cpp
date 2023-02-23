@@ -216,11 +216,11 @@ void do_http_get(std::string host, int port, int x, int y)
 int main(int argc, char **argv)
 {
     DisplayVersion();
-
+    TcpSocket gizmoCommandSocket;
     try
     {
 	if (connectToCommander) {
-	    TcpSocket gizmoCommandSocket(GIZMO_COMMANDER_PORT, BASE_STATION_AGX_IP);
+	    gizmoCommandSocket(GIZMO_COMMANDER_PORT, BASE_STATION_AGX_IP);
 	}
         cv::VideoCapture cap;
 
