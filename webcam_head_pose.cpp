@@ -216,11 +216,11 @@ void do_http_get(std::string host, int port, int x, int y)
 int main(int argc, char **argv)
 {
     DisplayVersion();
-    TcpSocket gizmoCommandSocket;
+    TcpSocket* gizmoCommandSocket = nullptr;
     try
     {
 	if (connectToCommander) {
-	    gizmoCommandSocket(GIZMO_COMMANDER_PORT, BASE_STATION_AGX_IP);
+	    gizmoCommandSocket = new TcpSocket(GIZMO_COMMANDER_PORT, BASE_STATION_AGX_IP);
 	}
         cv::VideoCapture cap;
 
@@ -341,7 +341,7 @@ int main(int argc, char **argv)
                 if (!isFacingCamera)
                 {
 		    if (connectToCommander) {
-                        gizmoCommandSocket.send("0", 1);
+                        gizmoCommandSocket->send("0", 1);
 		    }	    
                     if (image_points[0].x > nose_end_point2D[0].x)
                     {
@@ -356,7 +356,7 @@ int main(int argc, char **argv)
                 {
                     direction = FORWARD;
                    if (connectToCommander) {
-                        gizmoCommandSocket.send("1", 1);
+                        gizmoCommandSocket->send("1", 1);
 		   }	
                 }
 
