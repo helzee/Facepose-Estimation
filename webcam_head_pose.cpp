@@ -34,6 +34,7 @@
 
 int current_tilt = START_TILT;
 int current_pan = START_PAN;
+bool connectToCommander = true;
 
 // Eventually remove this!
 using namespace std;
@@ -105,7 +106,7 @@ string ParseCLI(int argc, char **argv)
 
     std::stringstream ss;
 
-    if (2 > argc)
+    if (argc < 2)
     {
         std::cout << "No arguments, will default to camera!" << std::endl;
         useIP = false;
@@ -121,7 +122,11 @@ string ParseCLI(int argc, char **argv)
         {
             std::cout << "camera input specified" << std::endl;
             useIP = false;
-        }
+        } else if (strncmp("-d" argv[1], 2) == 0)
+	{
+	    std::cout << "Debug mode activated. TCP client to GizmoCommander will not be initiated." << std::endl;
+	    connectToCommander = false;
+	}
     }
     else if (3 < argc)
     {
@@ -214,7 +219,9 @@ int main(int argc, char **argv)
 
     try
     {
-        TcpSocket gizmoCommandSocket(GIZMO_COMMANDER_PORT, BASE_STATION_AGX_IP);
+	if (connectToCommander) {
+	    TcpSocket gizmoCommandSocket(GIZMO_COMMANDER_PORT, BASE_STATION_AGX_IP);
+	}
         cv::VideoCapture cap;
 
         cap.open(ParseCLI(argc, argv));
@@ -333,7 +340,9 @@ int main(int argc, char **argv)
 
                 if (!isFacingCamera)
                 {
-                    gizmoCommandSocket.send("0", 1);
+		    if (connectToCommander) {
+                        gizmoCommandSocket.send("0", 1);
+		    }	    
                     if (image_points[0].x > nose_end_point2D[0].x)
                     {
                         direction = LEFT;
@@ -346,7 +355,9 @@ int main(int argc, char **argv)
                 else
                 {
                     direction = FORWARD;
-                    gizmoCommandSocket.send("1", 1);
+                   if (connectToCommander) {
+                        gizmoCommandSocket.send("1", 1);
+		   }	
                 }
 
                 cv::Scalar radiusColor = (isFacingCamera) ? cv::Scalar(0, 255, 0) : cv::Scalar(0, 0, 250);
