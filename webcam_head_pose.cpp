@@ -122,7 +122,7 @@ string ParseCLI(int argc, char **argv)
         {
             std::cout << "camera input specified" << std::endl;
             useIP = false;
-        } else if (strncmp("-d" argv[1], 2) == 0)
+        } else if (strncmp("-d", argv[1], 2) == 0)
 	{
 	    std::cout << "Debug mode activated. TCP client to GizmoCommander will not be initiated." << std::endl;
 	    connectToCommander = false;
