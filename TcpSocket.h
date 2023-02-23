@@ -14,6 +14,7 @@ using namespace std;
 class TcpSocket
 {
 public:
+   TcpSocket();
    TcpSocket(const char *port);
    TcpSocket(const char *port, const char *address);
 
