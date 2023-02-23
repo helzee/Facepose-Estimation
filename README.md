@@ -33,6 +33,7 @@ If `ServoServer.py` has not launched yet it will not recieve these updates and t
 - You can get a point that shows in 3d space what direction a person is facing.
   - Akin to if someone has a pinocchio nose.
 - Calculate the distance of that point to the person's actual nose in 2d space.
+
   - A heuristic is used to determine if they are looking at or away from the camera.
 - If the person is looking away you can calculate if they are looking left or right.
   - Too much of the landmarks used to determine the person's face is obscured to figure out if they are looking up down. If that person is looking up or down.
@@ -41,4 +42,9 @@ If `ServoServer.py` has not launched yet it will not recieve these updates and t
 - When `FaceposeEstimation.exe` finds an image with a face, it sends the new pan and tilt to `ServoServer.py`.
 - A thread is spawned and the server attempts to move the servos so that the camera can pan and tilt towards the new pan and tilt values it has recieved.
   - The movement of the servos is done via exponential interpolation, the distance from the current pan and tilt and the new pan and tilt is halved until the servos "snap" to the correct angle.
+  
+  ## Local testing
+This program uses a TCP client to connect to the GizmoCommander program running on the base station. Run with the argument (-d) or run the localLauncher.sh script
+to prevent this client from attempting to connect. Failed connection attempts crash the program. -d is not compatible with the other arguments this command takes, so
+be careful trying to use multiple flags, the parseArgs function is brittle. 
 
